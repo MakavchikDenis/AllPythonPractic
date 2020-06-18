@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet"
+href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <title>Riddles</title>
+</head>
+<body>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-8">
+            <h1 class="mt-2">Riddles</h1>
+            {% if user.is_authenticated %}
+                <p class="text-right">
+                    Hello, {{ user.username }}!
+                    <a href="/AppRiddles/logout">Log out</a> |
+                    <a href="/AppRiddles/password-change">
+                        Change password
+                    </a>
+                    {% if user.is_staff %}
+                    | <a href="/AppRiddles/admin"> Admin panel</a>
+                    {% endif %}
+                {% if user.email == '' %}
+                    | <a href="/AppRiddles/subscribe">Subscribe</a>
+                    {% else %}
+                 | <a href="/AppRiddles/unsubscribe">Unsubscribe</a>
+                {% endif %}
+                </p>
+            {% else %}
+                <p class="text-right">
+                    <a href="/AppRiddles/login">Log in</a> |
+                    <a href="/AppRiddles/register">Register</a>
+                </p>
+            {% endif %}
+            <hr class="mt-0 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    {% block main %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
